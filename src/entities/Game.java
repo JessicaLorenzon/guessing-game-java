@@ -3,9 +3,17 @@ package entities;
 import java.util.Random;
 import java.util.Scanner;
 
+import service.Level;
+
 public class Game {
 
-	public void play(String difficulty, int attempts) {
+	private Level level;
+
+	public Game(Level level) {
+		this.level = level;
+	}
+
+	public void play() {
 
 		Random rand = new Random();
 		int drawnNumber = rand.nextInt(100) + 1;
@@ -15,11 +23,11 @@ public class Game {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println();
-		System.out.println("Great! You have selected the " + difficulty + " difficulty level.");
+		System.out.println("Great! You have selected the " + level.getTextDifficulty() + " difficulty level.");
 		System.out.println("Let's start the game!");
 		System.out.println();
 
-		for (int i = 1; i <= attempts; i++) {
+		for (int i = 1; i <= level.getNumberAttempts(); i++) {
 
 			System.out.print("Enter your guess: ");
 			int guess = sc.nextInt();
@@ -27,7 +35,8 @@ public class Game {
 			attemptsCount++;
 
 			if (guess == drawnNumber) {
-				System.out.println("Congratulations! You guessed the correct number in " + attemptsCount + " attempts.");
+				System.out
+						.println("Congratulations! You guessed the correct number in " + attemptsCount + " attempts.");
 				break;
 			} else if (guess > drawnNumber) {
 				System.out.println("Incorrect! The number is less than " + guess);
@@ -37,7 +46,7 @@ public class Game {
 				System.out.println();
 			}
 
-			if (i == attempts) {
+			if (i == level.getNumberAttempts()) {
 				System.out.println("Number of attempts exceeded. Try again!");
 			}
 		}

@@ -3,35 +3,38 @@ package application;
 import java.util.Scanner;
 
 import entities.Game;
+import service.LevelEasy;
+import service.LevelHard;
+import service.LevelMedium;
 
 public class Program {
 
 	public static void main(String[] args) {
 
-		Game game = new Game();
-
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println(welcomeMenu());
-		
+
 		System.out.print("Enter your choice: ");
 		int difficulty = sc.nextInt();
 
+		Game game = null;
+
 		switch (difficulty) {
 		case 1:
-			game.play("Easy", 10);
+			game = new Game(new LevelEasy());
 			break;
 		case 2:
-			game.play("Medium", 5);
+			game = new Game(new LevelMedium());
 			break;
 		case 3:
-			game.play("Hard", 3);
+			game = new Game(new LevelHard());
 			break;
 		default:
 			System.out.println("Action not recognized. Try again!");
 			System.out.println();
 		}
-
+		game.play();
 		sc.close();
 	}
 
