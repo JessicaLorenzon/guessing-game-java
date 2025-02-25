@@ -19,7 +19,6 @@ public class Game {
 		int drawnNumber = rand.nextInt(100) + 1;
 		int attemptsCount = 0;
 
-		System.out.println(drawnNumber);
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println();
